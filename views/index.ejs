@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul { 
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <h1>unit converter</h1>
+    <nav>
+        <ul>
+            <li><a href="/length">length</a></li>
+            <li><a href="/weight">Weight</a></li>
+            <li><a href="/temperature">temperature</a></li>
+        </ul>
+    </nav>
+    <% if(locals.mode === "length") { %>
+    <main style="display: flex; justify-content: center; text-align: center;">
+        <% if (!locals.answer) { %>
+        <form style="display: flex; flex-direction: column; width: 80vw;" method="post" action="/handle-length" target="_self">
+            <label>lengte</label>
+            <input type="number" name="length">
+            <select name="convertfrom">
+                <option value="mm">millimeter</option>
+                <option value="cm">centimeter</option>
+                <option value="m">meter</option>
+                <option value="km">kilometer</option>
+                <option value="inch">inch</option>
+                <option value="ft">foot</option>
+                <option value="yd">yard</option>
+                <option value="mile">mile</option>
+            </select>
+            <select name="convertto">
+                <option value="mm">millimeter</option>
+                <option value="cm">centimeter</option>
+                <option value="m">meter</option>
+                <option value="km">kilometer</option>
+                <option value="inch">inch</option>
+                <option value="ft">foot</option>
+                <option value="yd">yard</option>
+                <option value="mile">mile</option>
+            </select>
+            <input style="margin-top: 10px;" type="submit">
+        </form>
+        <% } else { %>
+        <div style="display: flex; flex-direction: column;">
+            <h2>gegeven lengte:</h2>
+            <%= locals.answer %>
+            <h2>converteer van</h2>
+            <%= locals.convertFrom %>
+            <h2>converteer naar</h2>
+            <%= locals.convertTo %>
+
+            <h2>final answer:</h2>
+         <h3><%= locals.answer %> <%= locals.convertFrom %> equals <%= locals.finalAnswer %> <%= locals.convertTo %></h3>   
+            <a href="/length">reset</a>
+
+        </div>
+        <% } %>
+    </main>
+    <% } else if(locals.mode === "weight")  {%>
+        <h2>weight converter</h2>
+        <% } else if(locals.mode === "temperature") { %>
+            <h2>temperature converter</h2>
+            <% } else { %>
+                <h2>error</h2>
+                <% } %>
+</body>
+</html>
